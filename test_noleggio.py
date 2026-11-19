@@ -49,3 +49,11 @@ class TestNoleggio(unittest.TestCase):
         self.assertFalse(noleggio_a.si_sovrappone(noleggio_c))
         noleggio_d = Noleggio("A", date(2026, 11, 18), "10:00", "11:30", "Giovanni", 1)
         self.assertTrue(noleggio_a.si_sovrappone(noleggio_d))
+
+    def test_invariabilità_permanenza(self):
+        # from_dict(x.to_dict()) ricostruisce un noleggio equivalente, compreso l'id.
+        noleggio_a = Noleggio("A", date(2026, 11, 18), "09:00", "12:30", "Giovanni", 1)
+        noleggio_a.id = 3
+        noleggio_b = Noleggio.from_dict(noleggio_a.to_dict())
+        self.assertEqual(noleggio_a.id, noleggio_b.id)
+        self.assertEqual(noleggio_a.to_dict(), noleggio_b.to_dict())
