@@ -232,7 +232,7 @@ class Noleggio:
             raise ValueError(f"Il servizio è attivo dalle {APERTURA}")
         if minuto_fine > orario_in_minuti(CHIUSURA):
             raise ValueError(f"Il servizio è attivo fino alle {CHIUSURA}")
-        if minuto_inizio > minuto_fine:
+        if minuto_inizio >= minuto_fine:
             raise ValueError("L'orario di inizio deve precedere quello di fine")
 
         if not isinstance(conducente, str) or not conducente.strip():
