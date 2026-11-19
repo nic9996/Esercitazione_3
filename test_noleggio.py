@@ -39,3 +39,13 @@ class TestNoleggio(unittest.TestCase):
     def test_durata_minuti(self):
         noleggio = Noleggio("A", date(2026, 11, 18), "09:00", "12:30", "Giovanni", 1)
         self.assertEqual(noleggio.durata_minuti(), 210)  # durata in minuti 210
+
+    def test_si_sovrappone(self):
+        # si_sovrappone restituisce False per veicoli diversi e per giorni diversi, True per un intervallo contenuto in un altro
+        noleggio_a = Noleggio("A", date(2026, 11, 18), "09:00", "12:30", "Giovanni", 1)
+        noleggio_b = Noleggio("B", date(2026, 11, 18), "09:00", "12:30", "Giovanni", 1)
+        self.assertFalse(noleggio_a.si_sovrappone(noleggio_b))
+        noleggio_c = Noleggio("A", date(2026, 11, 17), "09:00", "12:30", "Giovanni", 1)
+        self.assertFalse(noleggio_a.si_sovrappone(noleggio_c))
+        noleggio_d = Noleggio("A", date(2026, 11, 18), "10:00", "11:30", "Giovanni", 1)
+        self.assertTrue(noleggio_a.si_sovrappone(noleggio_d))
