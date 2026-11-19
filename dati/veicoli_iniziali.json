@@ -1,0 +1,38 @@
+[
+  {
+    "codice": "F1",
+    "nome": "Furgone",
+    "posti": 3,
+    "dotazioni": [
+      "gancio traino",
+      "vano di carico"
+    ]
+  },
+  {
+    "codice": "M1",
+    "nome": "Monovolume",
+    "posti": 7,
+    "dotazioni": [
+      "seggiolino",
+      "portapacchi"
+    ]
+  },
+  {
+    "codice": "P1",
+    "nome": "Pulmino",
+    "posti": 9,
+    "dotazioni": [
+      "pedana disabili",
+      "seggiolino"
+    ]
+  },
+  {
+    "codice": "U1",
+    "nome": "Utilitaria",
+    "posti": 4,
+    "dotazioni": [
+      "catene",
+      "seggiolino"
+    ]
+  }
+]
