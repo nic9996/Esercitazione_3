@@ -1,7 +1,7 @@
 import unittest
 from datetime import date, timedelta
 
-from prenotazioni import Flotta, Veicolo, VeicoloNonTrovato, DataNonAmmessa, Noleggio, ORIZZONTE_GIORNI
+from prenotazioni import Flotta, Veicolo, VeicoloNonTrovato, DataNonAmmessa, Noleggio, ORIZZONTE_GIORNI, NoleggioNonTrovato
 
 class TestFlotta(unittest.TestCase):
     # aggiungi_veicolo rifiuta un codice duplicato con ValueError ; veicolo solleva VeicoloNonTrovato per un codice inesistente;
@@ -51,3 +51,11 @@ class TestFlotta(unittest.TestCase):
         self.assertEqual(prima, 1)
         self.assertEqual(seconda, 2)
         self.assertEqual(terza, 3)
+
+    def test_id_inesistente(self):
+        # cancella e noleggio sollevano NoleggioNonTrovato per un id inesistente;
+        flotta = Flotta()
+        with self.assertRaises(NoleggioNonTrovato):
+            flotta.noleggio("x")
+        with self.assertRaises(NoleggioNonTrovato):
+            flotta.cancella("x")
