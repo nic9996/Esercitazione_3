@@ -33,3 +33,21 @@ class TestFlotta(unittest.TestCase):
         flotta.prenota(noleggio, oggi=oggi)
         noleggio = Noleggio("A1", oggi + timedelta(days=ORIZZONTE_GIORNI), "09:00", "12:00", "Giovanni0", 1)  # data dell'orizzonte è ammessa
         flotta.prenota(noleggio, oggi=oggi)
+
+    def test_id_non_progressivi(self):
+        # gli id assegnati da prenota sono progressivi e non vengono riutilizzati dopo una cancellazione;
+        giorno = date(2026, 11, 20)
+        oggi = date(2026, 11, 18)
+        flotta = Flotta()
+        veicolo = Veicolo("A1", "Furgone", 3)
+        flotta.aggiungi_veicolo(veicolo)
+        noleggio_a = Noleggio("A1", giorno, "09:00", "12:00", "Giovanni0", 1)
+        prima = flotta.prenota(noleggio_a, oggi)
+        noleggio_b = Noleggio("A1", giorno, "12:00", "14:00", "Giovanni0", 1)
+        seconda = flotta.prenota(noleggio_b, oggi)
+        flotta.cancella(prima)
+        noleggio_c = Noleggio("A1", giorno, "14:00", "14:30", "Giovanni0", 1)
+        terza = flotta.prenota(noleggio_c, oggi)
+        self.assertEqual(prima, 1)
+        self.assertEqual(seconda, 2)
+        self.assertEqual(terza, 3)
